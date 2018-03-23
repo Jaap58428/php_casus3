@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Uuids;
 
 class User extends Authenticatable
 {
@@ -26,4 +27,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    public function itemsOwned()
+    {
+      return $this->hasMany('App\Item', 'owner', 'id');
+    }
+
+    public function itemsLent()
+    {
+      return $this->hasMany('App\Item', 'lender', 'id');
+    }
+
+
 }
