@@ -12,10 +12,10 @@ class StatesTableSeeder extends Seeder
     public function run()
     {
       $list = [
-        ['id' => Uuid::generate(), 'state_description' => 'Bij eigenaar'],
-        ['id' => Uuid::generate(), 'state_description' => 'Aangeboden aan lener'],
-        ['id' => Uuid::generate(), 'state_description' => 'Bij lener'],
-        ['id' => Uuid::generate(), 'state_description' => 'Aangeboden aan eigenaar'],
+        ['state_description' => 'Bij eigenaar'],
+        ['state_description' => 'Aangeboden aan lener'],
+        ['state_description' => 'Bij lener'],
+        ['state_description' => 'Aangeboden aan eigenaar'],
       ];
 
       foreach ($list as $item) {

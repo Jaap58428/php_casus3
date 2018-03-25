@@ -15,9 +15,9 @@ class AddForeignToItems extends Migration
      {
        Schema::table('items', function ($table)
        {
-         $table->foreign('state')->references('id')->on('states');
-         $table->foreign('owner')->references('id')->on('users');
-         $table->foreign('lender')->references('id')->on('users');
+         $table->foreign('state_id')->references('id')->on('states');
+         $table->foreign('owner_id')->references('id')->on('users');
+         $table->foreign('lender_id')->references('id')->on('users');
        });
      }
      /**

@@ -8,8 +8,8 @@ class State extends Model
 {
   protected $table = 'states';
 
-  public function owner()
+  public function items()
   {
-    return $this->hasMany('App\Item', 'state', 'id');
+    return $this->hasMany('App\Item', 'state_id', 'id');
   }
 }

@@ -10,17 +10,17 @@ class Item extends Model
 
   public function owner()
   {
-    return $this->belongsTo('App\User', 'owner', 'id');
+    return $this->belongsTo('App\User', 'owner_id', 'id');
   }
 
   public function lender()
   {
-    return $this->belongsTo('App\User', 'lender', 'id');
+    return $this->belongsTo('App\User', 'lender_id', 'id');
   }
 
   public function state()
   {
-    return $this->belongsTo('App\State', 'state', 'id');
+    return $this->belongsTo('App\State', 'state_id', 'id');
   }
 
 }

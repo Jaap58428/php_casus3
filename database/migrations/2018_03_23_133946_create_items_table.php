@@ -18,9 +18,9 @@ class CreateItemsTable extends Migration
           $table->primary('id');
           $table->string('name');
           $table->string('description');
-          $table->uuid('state');  // Default bij eigenaar
-          $table->uuid('owner');
-          $table->uuid('lender')->nullable($value = true);
+          $table->integer('state_id')->unsigned();  // Default bij eigenaar
+          $table->uuid('owner_id');
+          $table->uuid('lender_id')->nullable($value = true);
           $table->timestamps();
         });
     }

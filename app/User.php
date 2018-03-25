@@ -37,12 +37,12 @@ class User extends Authenticatable
 
     public function itemsOwned()
     {
-      return $this->hasMany('App\Item', 'owner', 'id');
+      return $this->hasMany('App\Item', 'owner_id', 'id');
     }
 
     public function itemsLent()
     {
-      return $this->hasMany('App\Item', 'lender', 'id');
+      return $this->hasMany('App\Item', 'lender_id', 'id');
     }
 
 
