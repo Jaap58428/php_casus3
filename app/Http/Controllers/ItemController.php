@@ -12,6 +12,16 @@ use Carbon\Carbon;
 class ItemController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -63,7 +73,7 @@ class ItemController extends Controller
       $newItem->state_id = 1;
 
       if ($newItem->save()) {
-        return redirect('/items');
+        return redirect('/items')->with('success', 'Je item is toegevoegd');
       }
     }
 
@@ -98,8 +108,10 @@ class ItemController extends Controller
       $item->lender_id = $request->input('newOwner');
       $item->state_id = 2;
 
+      $message = 'Je item is ter leen aangeboden aan ' . User::find($item->lender_id)->name;
+
       if ($item->save()) {
-        return redirect('/items');
+        return redirect('/items')->with('success', $message);
       }
     }
 

@@ -33,7 +33,8 @@
     </nav>
 
     <main>
-        @yield('content')
+      @include('messages')
+      @yield('content')
     </main>
   </div>
 </body>
