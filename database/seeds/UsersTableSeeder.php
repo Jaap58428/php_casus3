@@ -12,9 +12,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
       $user_list = [
-        ['id' => Uuid::generate()->string, 'name' => 'Jaap', 'email' => 'jaap@gmail.com', 'password' => bcrypt('qwerty')],
-        ['id' => Uuid::generate()->string, 'name' => 'Joop', 'email' => 'joop@gmail.com', 'password' => bcrypt('qwerty')],
-        ['id' => Uuid::generate()->string, 'name' => 'Joep', 'email' => 'joep@gmail.com', 'password' => bcrypt('qwerty')],
+        ['id' => (string) Uuid::generate(), 'name' => 'Jaap', 'email' => 'jaap@gmail.com', 'password' => bcrypt('qwerty')],
+        ['id' => (string) Uuid::generate(), 'name' => 'Joop', 'email' => 'joop@gmail.com', 'password' => bcrypt('qwerty')],
+        ['id' => (string) Uuid::generate(), 'name' => 'Joep', 'email' => 'joep@gmail.com', 'password' => bcrypt('qwerty')],
       ];
 
       foreach ($user_list as $user) {

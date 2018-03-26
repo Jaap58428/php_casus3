@@ -20,3 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('items', 'ItemController');
+
+Route::put('/state/acceptLent', 'StateController@acceptLent');
+Route::put('/state/denyLent', 'StateController@denyLent');
+Route::put('/state/startReturn', 'StateController@startReturn');
+Route::put('/state/acceptReturn', 'StateController@acceptReturn');

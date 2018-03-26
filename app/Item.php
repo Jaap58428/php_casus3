@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
   protected $table = 'items';
-
+  protected $casts = [
+    'id' => 'string'
+  ];
   public function owner()
   {
     return $this->belongsTo('App\User', 'owner_id', 'id');

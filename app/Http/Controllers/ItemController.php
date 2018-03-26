@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\State;
+use App\User;
 use Uuid;
 use Carbon\Carbon;
-use App\User;
 
 class ItemController extends Controller
 {
@@ -20,14 +20,18 @@ class ItemController extends Controller
     {
       $currentUser = User::find(auth()->user()->id);
 
+      $itemsReturned = $currentUser->itemsOwned->where('state_id', 4);
+      $itemsForMe = $currentUser->itemsLent->where('state_id', 2);
       $myItems = $currentUser->itemsOwned;
-      $lentItems = $currentUser->itemsLent;
+      $lentItems = $currentUser->itemsLent->where('state_id', 3);
       $timeNow = Carbon::now()->toDateTimeString();
 
       $data = array(
         'myItems' => $myItems,
         'lentItems' => $lentItems,
         'timeNow' => $timeNow,
+        'itemsForMe' => $itemsForMe,
+        'itemsReturned' => $itemsReturned,
       );
 
       return view('items.index')->with($data);
@@ -52,29 +56,15 @@ class ItemController extends Controller
     public function store(Request $request)
     {
       $newItem = new Item;
-      $newItem->id = Uuid::generate()->string;
+      $newItem->id = (string) Uuid::generate();
       $newItem->name = $request->name;
       $newItem->description = $request->description;
       $newItem->owner_id = auth()->user()->id;
       $newItem->state_id = 1;
 
-
-      // return $newItem;
-
       if ($newItem->save()) {
         return redirect('/items');
       }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -85,7 +75,14 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+      $users = User::all();
+      $item = Item::find($id);
+      $data = array(
+        'users' => $users,
+        'item' => $item,
+      );
+
+      return view('items.edit')->with($data);
     }
 
     /**
@@ -97,17 +94,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $item = Item::find($id);
+      $item->lender_id = $request->input('newOwner');
+      $item->state_id = 2;
+
+      if ($item->save()) {
+        return redirect('/items');
+      }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+
 }
